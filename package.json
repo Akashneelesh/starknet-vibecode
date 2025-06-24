@@ -1,0 +1,29 @@
+{
+  "name": "tokenlock-deployment",
+  "version": "1.0.0",
+  "description": "TokenLock contract deployment script using starknet.js",
+  "main": "deploy.js",
+  "type": "module",
+  "scripts": {
+    "deploy": "node deploy.js",
+    "declare": "node scripts/declare.js",
+    "deploy-only": "node scripts/deploy-only.js",
+    "interact": "node scripts/interact.js",
+    "setup": "node scripts/setup.js"
+  },
+  "dependencies": {
+    "starknet": "^6.19.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  },
+  "keywords": [
+    "starknet",
+    "cairo",
+    "smart-contract",
+    "deployment"
+  ],
+  "author": "",
+  "license": "MIT"
+} 
