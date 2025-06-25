@@ -453,3 +453,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 Built with ❤️ for the Starknet ecosystem 
+
+## 🙏 Credits
+
+Kudos to the **Kasar Labs team** 💪 for building the **Cairo AI Coder** - an incredible tool that made developing this Cairo smart contract and documentation much more efficient and enjoyable! 
