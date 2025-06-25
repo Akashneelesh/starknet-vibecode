@@ -1,6 +1,6 @@
 # TokenLock Contract Deployment
 
-This repository contains a TokenLock smart contract written in Cairo for Starknet, along with comprehensive deployment and interaction scripts using starknet.js.
+This repository contains a TokenLock smart contract written in Cairo for Starknet, along with comprehensive deployment and interaction scripts using starknet.js, plus a modern Next.js frontend interface.
 
 ## 📋 Overview
 
@@ -10,6 +10,7 @@ The TokenLock contract allows users to lock ERC20 tokens for specific durations,
 - **Multi-lock Support**: Multiple locks per user and token
 - **Owner Controls**: Emergency withdrawal and ownership transfer
 - **Event Tracking**: Comprehensive event emissions for all operations
+- **Modern Frontend**: Professional Next.js web interface with wallet integration
 
 ## 🛠 Prerequisites
 
@@ -82,6 +83,192 @@ npm run deploy-only
 CLASS_HASH=0x123... npm run deploy-only
 ```
 
+## 🌐 Frontend Application
+
+### 🎨 Frontend Features
+
+The TokenLock frontend provides a beautiful, modern interface with:
+
+- **Professional Dark Theme**: Sleek gradient design with glass morphism effects
+- **Universal Wallet Support**: Connect with any Starknet wallet (ArgentX, Braavos, etc.)
+- **Token Locking Interface**: Easy-to-use forms with preset duration buttons
+- **Lock Management**: View and manage all your token locks
+- **Real-time Data**: Live updates from the deployed contract
+- **Responsive Design**: Works perfectly on desktop and mobile
+- **Batch Transactions**: Approve and lock tokens in a single transaction
+
+### 🏃‍♂️ Quick Frontend Setup
+
+1. **Navigate to the frontend directory:**
+```bash
+cd frontend
+```
+
+2. **Install frontend dependencies:**
+```bash
+npm install
+```
+
+3. **Configure your contract address:**
+```bash
+# Edit frontend/lib/contract.ts
+```
+
+4. **Update the contract configuration:**
+```typescript
+// In frontend/lib/contract.ts, replace with YOUR deployed contract address:
+export const TOKENLOCK_CONTRACT_ADDRESS = "0x04389148c3d1468245f22e8a6ef61f59a025820341a4b26216f8ae8643d9b7ec"
+```
+
+5. **Start the development server:**
+```bash
+npm run dev
+```
+
+6. **Open your browser to:**
+```
+http://localhost:3000
+```
+
+### 📝 Frontend Configuration
+
+#### Contract Address Setup
+
+**⚠️ IMPORTANT: Replace the Contract Address**
+
+After deploying your TokenLock contract, you **MUST** update the frontend configuration:
+
+1. **Open:** `frontend/lib/contract.ts`
+2. **Find:** Line 6 with `TOKENLOCK_CONTRACT_ADDRESS`
+3. **Replace:** With your deployed contract address from the deployment output
+
+```typescript
+// frontend/lib/contract.ts
+export const TOKENLOCK_CONTRACT_ADDRESS = "YOUR_DEPLOYED_CONTRACT_ADDRESS_HERE"
+```
+
+#### Supported Networks
+
+The frontend is configured for **Starknet Sepolia** by default. To change networks:
+
+1. **Edit:** `frontend/lib/contract.ts`
+2. **Update:** The RPC endpoint and chain configuration
+
+```typescript
+// For Mainnet:
+const provider = new RpcProvider({
+  nodeUrl: "https://starknet-mainnet.public.blastapi.io/rpc/v0_7"
+})
+```
+
+#### Token Addresses
+
+The frontend includes preset token addresses for common tokens:
+
+```typescript
+// STRK Token (Starknet's native token)
+"0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d"
+
+// ETH Token
+"0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7"
+
+// USDC Token  
+"0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8"
+```
+
+### 🎯 How to Use the Frontend
+
+#### 1. **Connect Your Wallet**
+- Click "Connect Wallet" in the top right
+- Choose your preferred Starknet wallet
+- Approve the connection request
+
+#### 2. **Lock Tokens**
+- Go to the "Lock Tokens" tab
+- Select a token from the dropdown (STRK, ETH, USDC)
+- Enter the amount you want to lock
+- Choose a duration (preset buttons or custom date)
+- Set the beneficiary address (or use "Use My Address")
+- Click "Lock Tokens"
+- Approve the transaction in your wallet
+
+#### 3. **View Your Locks**
+- Switch to the "View Locks" tab
+- See all your active and expired locks
+- View lock details, amounts, and unlock times
+- Unlock tokens when they become available
+
+### 🔧 Frontend Development
+
+#### File Structure
+```
+frontend/
+├── app/                    # Next.js app directory
+│   ├── globals.css        # Global styles and themes
+│   ├── layout.tsx         # Root layout component
+│   └── page.tsx           # Main page with tabs
+├── components/            # React components
+│   ├── Header.tsx         # Navigation header
+│   ├── LockTokens.tsx     # Token locking form
+│   ├── ViewLocks.tsx      # Lock management interface
+│   ├── WalletConnection.tsx # Wallet integration
+│   └── providers/
+│       └── StarknetProvider.tsx # Starknet context
+├── lib/                   # Utilities and configuration
+│   ├── contract.ts        # Contract configuration and ABIs
+│   └── utils.ts           # Helper functions
+├── package.json           # Dependencies and scripts
+└── README.md             # Frontend-specific documentation
+```
+
+#### Key Dependencies
+- **Next.js 14**: React framework with App Router
+- **Starknet.js v6.16.0**: Starknet blockchain interaction
+- **StarknetKit**: Universal wallet connection
+- **Tailwind CSS**: Utility-first CSS framework
+- **TypeScript**: Type safety and better development experience
+
+#### Available Scripts
+```bash
+# Development server (with hot reload)
+npm run dev
+
+# Production build
+npm run build
+
+# Start production server
+npm run start
+
+# TypeScript type checking
+npm run type-check
+
+# Linting
+npm run lint
+```
+
+### 🌐 Deployment Options
+
+#### Vercel (Recommended)
+1. **Push to GitHub**
+2. **Connect to Vercel**
+3. **Auto-deploy on push**
+
+#### Manual Build
+```bash
+cd frontend
+npm run build
+npm run start
+```
+
+#### Docker
+```bash
+# Build image
+docker build -t tokenlock-frontend .
+
+# Run container
+docker run -p 3000:3000 tokenlock-frontend
+```
+
 ## 🔗 Contract Interaction
 
 After deployment, you can interact with your contract:
@@ -121,7 +308,7 @@ await interactor.lockTokens(
 );
 ```
 
-## 📁 Script Structure
+## 📁 Project Structure
 
 ```
 ├── deploy.js              # Main deployment script (declare + deploy)
@@ -130,7 +317,15 @@ await interactor.lockTokens(
 │   ├── declare.js         # Contract declaration only
 │   ├── deploy-only.js     # Deployment with existing class hash
 │   └── interact.js        # Contract interaction utilities
-├── package.json           # Dependencies and scripts
+├── frontend/              # Next.js frontend application
+│   ├── app/              # Next.js app directory
+│   ├── components/       # React components
+│   ├── lib/              # Contract configuration and utilities
+│   └── package.json      # Frontend dependencies
+├── src/                   # Cairo smart contract source
+│   └── lib.cairo         # TokenLock contract implementation
+├── tests/                 # Cairo contract tests
+├── package.json           # Backend dependencies and scripts
 └── env.example           # Environment variables template
 ```
 
