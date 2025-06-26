@@ -481,10 +481,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Review [starknet.js documentation](https://www.starknetjs.com/)
 - Open an issue in this repository
 
----
-
-Built with ❤️ for the Starknet ecosystem 
-
 ## 🙏 Credits
 
-Kudos to the **Kasar Labs team** 💪 for building the **Cairo AI Coder** - an incredible tool that made developing this Cairo smart contract and documentation much more efficient and enjoyable! 
+Kudos to the **Kasar Labs team** 💪 for building the **Cairo AI Coder** - an incredible tool that made developing this Cairo smart contract and the whole dapp much easy ! 
+
+---
+
+Built with ❤️ for the Starknet ecosystem by Akash
