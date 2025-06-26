@@ -5,15 +5,16 @@
   "main": "deploy.js",
   "type": "module",
   "scripts": {
-    "deploy": "node deploy.js",
-    "declare": "node scripts/declare.js",
-    "deploy-only": "node scripts/deploy-only.js",
+    "declare_and_deploy": "node scripts/declare_and_deploy.js",
     "interact": "node scripts/interact.js",
-    "setup": "node scripts/setup.js"
+    "setup": "node scripts/setup.js",
+    "dev": "cd frontend && npm run dev"
   },
   "dependencies": {
     "starknet": "^6.19.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "starknet-devnet": "^0.4.0",
+    "cross-port-killer": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0"

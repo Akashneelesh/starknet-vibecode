@@ -56,32 +56,54 @@ SALT=0x0
 
 ## 🚀 Deployment
 
-### Option 1: Full Deployment (Declare + Deploy)
+### Single-Command Deployment (Recommended)
 ```bash
-npm run deploy
+npm run declare_and_deploy
 ```
 
 This command will:
-1. Declare the contract on the network
-2. Deploy an instance of the contract
-3. Verify the deployment
-4. Display a comprehensive summary
+1. **Declare** the contract on the network (or use existing declaration)
+2. **Deploy** a new contract instance with a random salt
+3. **Verify** the deployment automatically
+4. **Display** a comprehensive summary with contract address and explorer links
 
-### Option 2: Step-by-Step Deployment
+**Key Features:**
+- ✅ **Smart Declaration**: Automatically handles already-declared contracts
+- ✅ **Fresh Deployment**: Uses random salt to create new contract instances every time  
+- ✅ **Error Handling**: Gracefully handles deployment conflicts
+- ✅ **Auto-Verification**: Confirms the contract is working correctly
+- ✅ **Complete Summary**: Shows all essential deployment information
+- ✅ **One Command**: No need to manage separate declare/deploy steps
 
-#### 1. Declare Only
+### Available NPM Scripts
+
 ```bash
-npm run declare
+# Main deployment command (declare + deploy)
+npm run declare_and_deploy
+
+# Setup initial project configuration
+npm run setup
+
+# Interact with deployed contracts  
+npm run interact
+
+# Run the frontend development server
+npm run dev
 ```
 
-#### 2. Deploy with Existing Class Hash
-```bash
-# Add CLASS_HASH to your .env file, then:
-npm run deploy-only
+### Script Details
 
-# Or provide it inline:
-CLASS_HASH=0x123... npm run deploy-only
-```
+**`declare_and_deploy`**: The main deployment script that:
+- Compiles the contract if needed
+- Declares the class on the network (or reuses existing)
+- Deploys a new contract instance with random salt
+- Verifies deployment and displays summary
+
+**`setup`**: Helps with initial project configuration and environment setup
+
+**`interact`**: Provides an interactive interface to call contract functions
+
+**`dev`**: Starts the Next.js frontend development server
 
 ## 🌐 Frontend Application
 
@@ -271,7 +293,13 @@ docker run -p 3000:3000 tokenlock-frontend
 
 ## 🔗 Contract Interaction
 
-After deployment, you can interact with your contract:
+After deployment, you can interact with your contract using the interactive script:
+
+```bash
+npm run interact
+```
+
+Or directly with the contract address:
 
 ```bash
 node scripts/interact.js <CONTRACT_ADDRESS>
@@ -311,11 +339,10 @@ await interactor.lockTokens(
 ## 📁 Project Structure
 
 ```
-├── deploy.js              # Main deployment script (declare + deploy)
 ├── scripts/
 │   ├── config.js          # Configuration management
-│   ├── declare.js         # Contract declaration only
-│   ├── deploy-only.js     # Deployment with existing class hash
+│   ├── declare_and_deploy.js  # Main deployment script (declare + deploy)
+│   ├── setup.js           # Initial project setup utilities
 │   └── interact.js        # Contract interaction utilities
 ├── frontend/              # Next.js frontend application
 │   ├── app/              # Next.js app directory
@@ -367,15 +394,19 @@ DEVNET_RPC_URL=http://localhost:5050/rpc
 After successful deployment, you'll see:
 
 ```
-============================================================
-📊 DEPLOYMENT SUMMARY
+🚀 DECLARATION & DEPLOYMENT SUMMARY
 ============================================================
 🌐 Network: sepolia
-📋 Class Hash: 0x123...
-📍 Contract Address: 0x456...
-👑 Owner: 0x789...
-🔗 Explorer: https://sepolia.voyager.online/contract/0x456...
+📋 Class Hash: 0x000763bf9fdcb28f9b9a32be7717223a3e5a242a817c01c6a90c6d002fd0ac2f
+📍 Contract Address: 0x04f1628a07da95bf90b3053e76450fc6fc5ad68fbec330c6bea3a4c87ce6e485
+👑 Owner: 0x03e3f850429c913339799f97519ef42f7906d19f328f9918cd8a484467f2b923
+🔗 Explorer: https://sepolia.voyager.online/contract/0x04f1628a07da95bf90b3053e76450fc6fc5ad68fbec330c6bea3a4c87ce6e485
 ============================================================
+
+🎯 Next steps:
+• Test your contract functions
+• Lock some tokens using lock_tokens()
+• Monitor events on the explorer
 ```
 
 ## 🛡 Security Considerations
@@ -437,8 +468,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
    - Ensure all required variables are set
 
 3. **"Class hash not found on network"**
-   - Run `npm run declare` first
-   - Or check if the class hash in your `.env` is correct
+   - Run `npm run declare_and_deploy` (it handles declaration automatically)
+   - Check if the class hash in your `.env` is correct
 
 4. **"Insufficient account balance"**
    - Ensure your account has enough STRK for gas fees
